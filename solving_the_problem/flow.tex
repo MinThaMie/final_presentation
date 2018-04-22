@@ -1,0 +1,181 @@
+\subsection*{}
+\begin{frame}<1-2>[label=flow]{GI processing pipeline}
+    \tikzstyle{cloud} = [circle, draw, text width=5em, text centered, minimum height=4em, node distance=3cm, inner sep=0pt]
+    \tikzstyle{test} = [diamond, draw, aspect=2, fill=orange!20, text width = 5em, minimum width = 4cm, minimum height = 2cm, inner sep=1pt, align=center]
+    \tikzstyle{line} = [draw, thick]
+    \tikzstyle{line-with-arrow} = [line, -\darkarrow]
+    \tikzstyle{block} = [draw, rectangle ,fill=blue!20, node distance=3cm, minimum height=2em, text width=6em, text centered, minimum height=4em]
+    
+    \centering
+
+    \adjustbox{max height = \dimexpr\textheight-2cm, max width=\textwidth}{
+        \begin{tikzpicture}[auto]
+            
+            \only<1->{
+                \node [cloud, fill=yellow!20] (graphs) at (canvas cs:x=0cm,y=0cm) {Graphs $G$ and $H$};
+                \node [cloud, fill=red!20] (isnotiso) at (canvas cs:x=6cm,y=0cm) {Assign $G$~and~$H$ \textbf{in~different} isomorphic groups};
+                \node [cloud, fill=green!20] (isiso) at (canvas cs:x=12cm, y=0cm) {Assign $G$~and~$H$ \textbf{in~the~same} isomorphic group};
+            }
+            
+            \only<1, 4->{
+                \node [test] (preproc) at (canvas cs:x=0cm, y=-4cm) {Preprocess graphs};
+            }
+            
+            \only<1, 6->{
+                \node [test] (areconnected) at (canvas cs:x=0cm, y=-8cm) {Determine connectivity};
+            }
+            
+            \only<1, 7->{
+                \node [test] (istree1) at (canvas cs:x=12cm, y=-8cm) {Determine if trees};
+            }
+            
+            \only<1, 9->{
+                \node [test] (moddec) at (canvas cs:x=20cm, y=-8cm) {Modular decomposition};
+            }
+            
+            \only<1, 10->{
+                \node [test] (istree2) at (canvas cs:x=20cm, y=-4cm) {Determine if trees};
+            }
+            
+            \only<1, 12->{
+                \node [test] (treeproc) at (canvas cs:x=12cm,y=-4cm) {Process trees};
+            }
+            
+            \only<1, 14->{
+                \node [test] (colorref) at (canvas cs:x=20cm, y=0cm) {Use color refinement \& branching};
+            }
+            
+            \only<2-3>{
+                \node [test, opacity=0.2] (areconnected) at (canvas cs:x=0cm, y=-8cm) {Determine connectivity};
+            }
+            
+            \only<2-5>{
+                \node [test, opacity=0.2] (istree1) at (canvas cs:x=12cm, y=-8cm) {Determine if trees};
+            }
+            
+            \only<2-6>{
+                \node [test, opacity=0.2] (moddec) at (canvas cs:x=20cm, y=-8cm) {Modular decomposition};
+            }
+            
+            \only<2-8>{
+                \node [test, opacity=0.2] (istree2) at (canvas cs:x=20cm, y=-4cm) {Determine if trees};
+            }
+            
+            \only<2-9>{
+                \node [test, opacity=0.2] (treeproc) at (canvas cs:x=12cm,y=-4cm) {Process trees};
+            }
+            
+            \only<2-11>{
+                \node [test, opacity=0.2] (colorref) at (canvas cs:x=20cm, y=0cm) {Use color refinement \& branching};
+            }
+
+            \only<2-3>{
+                \node [test, line width = 1mm] (preproc) at (canvas cs:x=0cm, y=-4cm) {Preprocess graphs};
+            }
+            
+            \only<4-5>{
+                \node[test, line width = 1mm] (areconnected) at (canvas cs:x=0cm, y=-8cm) {Determine connectivity};
+            }
+            
+            \only<6>{
+                \node[test, line width = 1mm] (istree1) at (canvas cs:x=12cm, y=-8cm) {Determine if trees};
+            }
+            
+            \only<7-8>{
+                \node [test, line width = 1mm] (moddec) at (canvas cs:x=20cm, y=-8cm) {Modular decomposition};
+            }
+            
+            \only<9>{
+                \node[test, line width = 1mm] (istree2) at (canvas cs:x=20cm, y=-4cm) {Determine if trees};
+            }
+            
+            \only<10-11>{
+                \node [test, line width = 1mm] (treeproc) at (canvas cs:x=12cm,y=-4cm) {Process trees};
+            }
+            
+            \only<12-13>{
+                \node [test, line width = 1mm] (colorref) at (canvas cs:x=20cm, y=0cm) {Use color refinement \& branching};
+            }
+            
+            \only<1->{
+                \path [line-with-arrow] (graphs) -- (preproc);
+                \path[line-with-arrow] (preproc) -- node [] {not isomorphic} +(6cm, 0);
+                \path [line-with-arrow] +(6cm, -4cm) -- (isnotiso);
+                \path[line-with-arrow] (preproc) -- node [near start] {possibly isomorphic} (areconnected);
+            }
+            
+            \only<1, 4->{
+                \path [line-with-arrow] (areconnected) -| ++(-3, 2) |- node [near start, rotate=90, yshift=1em, xshift=2em] {same \# components} (preproc);
+                \path [line-with-arrow] (areconnected) |- ++(0, -2) -| node [near start] {both connected} (istree1);
+                \path [line-with-arrow] (areconnected) -- node [align = left] {different\\\# components} +(6cm, 0cm);
+                \path [line] +(6cm, -8cm) -- +(6cm, -4cm);
+            }
+            
+            \only<1, 6->{
+                \path[line-with-arrow] (istree1) -- node [] {both not trees} (moddec);
+                \path[line-with-arrow] (istree1) -- node [near start] {both are trees} (treeproc);
+                \path[line-with-arrow] (istree1) -- node [] {only one tree} +(-6cm, 0);
+            }
+            
+            \only<1, 7->{
+                \path[line-with-arrow] (moddec) -- node [near start] {similar decompositions}(istree2);
+                \path[line-with-arrow] (moddec) -| node [near start, xshift=0em, align = left] {different\\decom-\\positions} +(4cm, 4cm);
+                \path [line-with-arrow] +(24cm, -4cm) |- +(20cm, 3cm);
+                \path [line-with-arrow] +(20cm, 3cm) -| (isnotiso);
+            }
+            
+            \only<1, 9->{
+                \path[line-with-arrow] (istree2) -- node [align = left] {only one\\tree} +(4cm, 0cm);
+                \path[line-with-arrow] (istree2) -- node [] {both are trees} (treeproc);
+                \path[line-with-arrow] (istree2) -- node [near start] {both not trees} (colorref);
+            }
+            
+            \only<1, 10->{
+                \path[line-with-arrow] (treeproc) -- node [near start] {isomorphic} (isiso);
+                \path[line-with-arrow] (treeproc) -- node [] {not isomorphic} +(-6cm, 0); +(4cm, 4cm);
+            }
+            
+            \only<1, 12->{
+                \path [line-with-arrow] (colorref) -- node [] {isomorphic} (isiso);
+                \path [line-with-arrow] (colorref) -- node [near start] {not isomorphic} +(0, 3cm);
+            }
+
+            \only<2-3>{
+                \path [line-with-arrow, opacity=.2] (areconnected) -| ++(-3, 2) |- node [near start, rotate=90, yshift=1em, xshift=2em] {same \# components} (preproc);
+                \path [line-with-arrow, opacity=.2] (areconnected) |- ++(0, -2) -| node [near start] {both connected} (istree1);
+                \path [line-with-arrow, opacity=.2] (areconnected) -- node [align = left] {different\\\# components} +(6cm, 0cm);
+                \path [line, opacity=.2] +(6cm, -8cm) -- +(6cm, -4cm);
+            }
+            
+            \only<2-5>{
+                \path[line-with-arrow, opacity=.2] (istree1) -- node [] {both not trees} (moddec);
+                \path[line-with-arrow, opacity=.2] (istree1) -- node [near start] {both are trees} (treeproc);
+                \path[line-with-arrow, opacity=.2] (istree1) -- node [] {only one tree} +(-6cm, 0);
+            }
+            
+            \only<2-6>{
+                \path[line-with-arrow, opacity=.2] (moddec) -- node [near start] {similar decompositions}(istree2);
+                \path[line-with-arrow, opacity=.2] (moddec) -| node [near start, xshift=0em, align = left] {different\\decom-\\positions} +(4cm, 4cm);
+                \path [line-with-arrow, opacity=.2] +(24cm, -4cm) |- +(20cm, 3cm);
+                \path [line-with-arrow, opacity=.2] +(20cm, 3cm) -| (isnotiso);
+            }
+            
+            \only<2-8>{
+                \path[line-with-arrow, opacity=.2] (istree2) -- node [align = left] {only one\\tree} +(4cm, 0cm);
+                \path[line-with-arrow, opacity=.2] (istree2) -- node [] {both are trees} (treeproc);
+                \path[line-with-arrow, opacity=.2] (istree2) -- node [near start] {both not trees} (colorref);
+            }
+            
+            \only<2-9>{
+                \path[line-with-arrow, opacity=.2] (treeproc) -- node [near start] {isomorphic} (isiso);
+                \path[line-with-arrow, opacity=.2] (treeproc) -- node [] {not isomorphic} +(-6cm, 0); +(4cm, 4cm);
+            }
+            
+            \only<2-11>{
+                \path [line-with-arrow, opacity=.2] (colorref) -- node [] {isomorphic} (isiso);
+                \path [line-with-arrow, opacity=.2] (colorref) -- node [near start] {not isomorphic} +(0, 3cm);
+            }
+            
+        \end{tikzpicture}
+    }
+\end{frame}

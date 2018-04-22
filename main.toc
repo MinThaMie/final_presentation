@@ -1,0 +1,10 @@
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Solving the problem}{25}{0}{2}
+\beamer@subsectionintoc {2}{3}{Preprocessing}{29}{0}{2}
+\beamer@subsectionintoc {2}{5}{Connectivity}{35}{0}{2}
+\beamer@subsectionintoc {2}{7}{Modular decomposition}{45}{0}{2}
+\beamer@subsectionintoc {2}{9}{Tree isomorphism in $\mathcal {O}(n)$}{62}{0}{2}
+\beamer@subsectionintoc {2}{11}{Fast colour refinement and branching}{77}{0}{2}
+\beamer@subsectionintoc {2}{14}{Number of automorphisms}{94}{0}{2}
+\beamer@sectionintoc {3}{Results}{103}{0}{3}
+\beamer@subsectionintoc {5}{3}{Bonany's algorithm}{119}{0}{3}

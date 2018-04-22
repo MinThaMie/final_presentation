@@ -1,0 +1,154 @@
+% \begin{frame}
+% \begin{tikzpicture}[level/.style={sibling distance=15mm},  every node/.style={ minimum size=0.75cm}]
+% \node [circle,draw] (z){}
+%     child {node [circle,draw] (a){}
+%     child {node [circle,draw=green, line width=0.5mm] (i) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (j) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (b) {0}}
+%     child {node [circle,draw] (c) {}
+%         child {node [circle,draw=green, line width=0.5mm] (k) {0}}
+%         child {node [circle,draw=green, line width=0.5mm] (l) {0}}
+%     }
+%     child {node [circle,draw] (d) {}
+%         child {node (w) {} edge from parent[draw=none]} %inivisble node
+%         child {node [circle,draw, text width=1.1cm,align=center] (e) {(0,0,0)}
+%             child {node [circle,draw=green, line width=0.5mm] (f) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (g) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (h) {0}
+%                 child [grow=right] {node (o) {level 3} edge from parent[draw=none]
+%                     child [grow=up] {node (p) {level 2} edge from parent[draw=none]
+%                         child [grow=up] {node (q) {level 1} edge from parent[draw=none]
+%                             child [grow=up] {node {level 0} edge from parent[draw=none]}
+%                         }
+%                     }
+%                 }
+%             }
+%         }
+%     };
+% \end{tikzpicture}
+% \end{frame}
+
+% \begin{frame}{Assign value to vertex with tuple}
+% \begin{tikzpicture}[level/.style={sibling distance=15mm},  every node/.style={ minimum size=0.75cm}]
+% \node [circle,draw] (z){}
+%     child {node [circle,draw] (a){}
+%     child {node [circle,draw=green, line width=0.5mm] (i) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (j) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (b) {0}}
+%     child {node [circle,draw] (c) {}
+%         child {node [circle,draw=green, line width=0.5mm] (k) {0}}
+%         child {node [circle,draw=green, line width=0.5mm] (l) {0}}
+%     }
+%     child {node [circle,draw] (d) {}
+%         child {node (w) {} edge from parent[draw=none]} %inivisble node
+%         child {node [circle,draw=green, line width=0.5mm] (e) {1}
+%             child {node [circle,draw=green, line width=0.5mm] (f) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (g) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (h) {0}
+%                 child [grow=right] {node (o) {level 3} edge from parent[draw=none]
+%                     child [grow=up] {node (p) {level 2} edge from parent[draw=none]
+%                         child [grow=up] {node (q) {level 1} edge from parent[draw=none]
+%                             child [grow=up] {node {level 0} edge from parent[draw=none]}
+%                         }
+%                     }
+%                 }
+%             }
+%         }
+%     };
+% \end{tikzpicture}
+% \end{frame}
+
+% \begin{frame}{Assign tuple to vertex at level 1}
+% \begin{tikzpicture}[level/.style={sibling distance=15mm},  every node/.style={ minimum size=0.75cm}]
+% \node [circle,draw] (z){}
+%     child {node [circle,draw] (a){(0,0)}
+%     child {node [circle,draw=green, line width=0.5mm] (i) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (j) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (b) {0}}
+%     child {node [circle,draw] (c) {(0,0)}
+%         child {node [circle,draw=green, line width=0.5mm] (k) {0}}
+%         child {node [circle,draw=green, line width=0.5mm] (l) {0}}
+%     }
+%     child {node [circle,draw] (d) {(1)}
+%         child {node (w) {} edge from parent[draw=none]} %inivisble node
+%         child {node [circle,draw=green, line width=0.5mm] (e) {1}
+%             child {node [circle,draw=green, line width=0.5mm] (f) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (g) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (h) {0}
+%                 child [grow=right] {node (o) {level 3} edge from parent[draw=none]
+%                     child [grow=up] {node (p) {level 2} edge from parent[draw=none]
+%                         child [grow=up] {node (q) {level 1} edge from parent[draw=none]
+%                             child [grow=up] {node {level 0} edge from parent[draw=none]}
+%                         }
+%                     }
+%                 }
+%             }
+%         }
+%     };
+% \end{tikzpicture}
+% \end{frame}
+
+% \begin{frame}{Assign values to the vertices}
+% \begin{tikzpicture}[level/.style={sibling distance=15mm},  every node/.style={ minimum size=0.75cm}]
+% \node [circle,draw] (z){}
+%     child {node [circle,draw=green, line width=0.5mm] (a){1}
+%     child {node [circle,draw=green, line width=0.5mm] (i) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (j) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (b) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (c) {1}
+%         child {node [circle,draw=green, line width=0.5mm] (k) {0}}
+%         child {node [circle,draw=green, line width=0.5mm] (l) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (d) {2}
+%         child {node (w) {} edge from parent[draw=none]} %inivisble node
+%         child {node [circle,draw=green, line width=0.5mm] (e) {1}
+%             child {node [circle,draw=green, line width=0.5mm] (f) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (g) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (h) {0}
+%                 child [grow=right] {node (o) {level 3} edge from parent[draw=none]
+%                     child [grow=up] {node (p) {level 2} edge from parent[draw=none]
+%                         child [grow=up] {node (q) {level 1} edge from parent[draw=none]
+%                             child [grow=up] {node {level 0} edge from parent[draw=none]}
+%                         }
+%                     }
+%                 }
+%             }
+%         }
+%     };
+% \end{tikzpicture}
+% \end{frame}
+
+% \begin{frame}{Assign tuple to vertex the root}
+% \begin{tikzpicture}[level/.style={sibling distance=15mm},  every node/.style={ minimum size=0.75cm}]
+% \node [circle,draw] (z){(0,1,1,2)}
+%     child {node [circle,draw=green, line width=0.5mm] (a){1}
+%     child {node [circle,draw=green, line width=0.5mm] (i) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (j) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (b) {0}}
+%     child {node [circle,draw=green, line width=0.5mm] (c) {1}
+%         child {node [circle,draw=green, line width=0.5mm] (k) {0}}
+%         child {node [circle,draw=green, line width=0.5mm] (l) {0}}
+%     }
+%     child {node [circle,draw=green, line width=0.5mm] (d) {2}
+%         child {node (w) {} edge from parent[draw=none]} %inivisble node
+%         child {node [circle,draw=green, line width=0.5mm] (e) {1}
+%             child {node [circle,draw=green, line width=0.5mm] (f) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (g) {0}}
+%             child {node [circle,draw=green, line width=0.5mm] (h) {0}
+%                 child [grow=right] {node (o) {level 3} edge from parent[draw=none]
+%                     child [grow=up] {node (p) {level 2} edge from parent[draw=none]
+%                         child [grow=up] {node (q) {level 1} edge from parent[draw=none]
+%                             child [grow=up] {node {level 0} edge from parent[draw=none]}
+%                         }
+%                     }
+%                 }
+%             }
+%         }
+%     };
+% \end{tikzpicture}
+% \end{frame}

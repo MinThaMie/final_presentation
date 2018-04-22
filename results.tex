@@ -1,0 +1,60 @@
+\section{Results}
+% Gegenereerd met tablesgenerator.com
+
+% Maak tabellen passend met:
+% \adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+% ...
+% }
+
+\begin{frame}{Results of the basic graphs}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+\begin{tabular}[c]{@{}l@{}}file\\ name\end{tabular} & \begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular} & \begin{tabular}[c]{@{}r@{}}modular decom-\\ position factor\end{tabular} & \begin{tabular}[c]{@{}r@{}}isomorphic\\ graphs\end{tabular} & \begin{tabular}[c]{@{}r@{}}number of\\ automorphisms\end{tabular} & \begin{tabular}[c]{@{}r@{}}time to solve\\ (sec)\end{tabular} \\ \midrule
+basicAut1.gr & 1 & 35 & 34 & 576 & -- & 2304 & 0.037 \\ \midrule
+basicAut2.gr & 1 & 69 & 96 & 1 & -- & 128 & 1.554 \\ \midrule
+basicGI1.grl & 4 & 147 & 857 & 1 & \begin{tabular}[c]{@{}r@{}}$[0, 2]$\\ $[1, 3]$\end{tabular} & -- & 10.678 \\ \midrule
+basicGI2.grl & 4 & 40 & 60 & 1 & \begin{tabular}[c]{@{}r@{}}$[0, 2]$\\ $[1, 3]$\end{tabular} & -- & 6.179 \\ \midrule
+basicGI3.grl & 7 & 32 & 80 & 1 & \begin{tabular}[c]{@{}r@{}}$[0, 2, 6]$\\ $[1, 3, 4, 5]$\end{tabular} & -- & 1.813 \\ \midrule
+basicGIAut.grl & 9 & 40 & 75 & 1 & \begin{tabular}[c]{@{}r@{}}$[0, 5, 7]$\\ $[1, 6]$\\ $[2, 3]$\\ $[4, 8]$\end{tabular} & \begin{tabular}[c]{@{}r@{}}10\\ 20\\ 20\\ 10\end{tabular} & 3.719 \\ \bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Results of the bonus graph isomorphism problems}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+\begin{tabular}[c]{@{}l@{}}file\\ nr\end{tabular} & \begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular} & \begin{tabular}[c]{@{}r@{}}modular decom-\\ position factor\end{tabular} & \begin{tabular}[c]{@{}r@{}}isomorphic\\ graphs\end{tabular} & \begin{tabular}[c]{@{}r@{}}time to solve\\ (min:sec)\end{tabular} \\ \midrule
+\textbf<2>{1} & \textbf<2>{8} & \textbf<2>{52} & \textbf<2>{\{762, 858\}} & \begin{tabular}[c]{@{}r@{}}\textbf<2>{67108864}\\ \textbf<2>{4403012567040000}\\ \textbf<2>{543581798400}\\ \textbf<2>{4403012567040000}\end{tabular} & \begin{tabular}[c]{@{}r@{}}\textbf<2>{[0, 7]}\\ \textbf<2>{[1, 6]}\\ \textbf<2>{[2, 4]}\\ \textbf<2>{[3, 5]}\end{tabular} & \textbf<2>{0.9} \\ \midrule
+\textbf<3>{2} & \textbf<3>{12} & \textbf<3>{64} & \textbf<3>{204} & \begin{tabular}[c]{@{}r@{}}\textbf<3>{86973087744}\\ \textbf<3>{67108864}\\ \textbf<3>{5706304286883840000}\\ \textbf<3>{4403012567040000}\\ \textbf<3>{704482010726400}\\ \textbf<3>{5706304286883840000}\end{tabular} & \begin{tabular}[c]{@{}r@{}}\textbf<3>{[0, 3]}\\ \textbf<3>{[1, 4]}\\ \textbf<3>{[2 ,9]}\\ \textbf<3>{[5, 10]}\\ \textbf<3>{[6, 7]}\\ \textbf<3>{[8, 11]}\end{tabular} & \textbf<3>{0.4} \\ \midrule
+3 & 4 & 627 & 6777 & 1 & $[0, 3]$, $[1, 2]$ & 15:46.6 \\ \midrule
+4 & 6 & 80 & 120 & 1 & $[0, 2, 3, 4]$, $[1, 5]$ & 6:27.5 \\ \midrule
+5 & 8 & 300 & 300 & 1 & $[0, 2]$, $[1, 3]$, $[4, 6]$, $[5, 7]$ & 1.5 \\ \bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Results of the bonus automorphism problems}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+\begin{tabular}[c]{@{}l@{}}file\\ nr\end{tabular} & \begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular} & \begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular} & \begin{tabular}[c]{@{}r@{}}modular decom-\\ position factor\end{tabular} & \begin{tabular}[c]{@{}r@{}}number of\\ automorphisms\end{tabular} & \begin{tabular}[c]{@{}r@{}}time to solve\\ (min:sec)\end{tabular} \\ \midrule
+\textbf<2>{1} & \textbf<2>{1} & \textbf<2>{995} & \textbf<2>{994} & \textbf<2>{1} & \textbf<2>{3538944} & \textbf<2>{27:36.5} \\ \midrule
+\textbf<2>{2} & \textbf<2>{1} & \textbf<2>{181} & \textbf<2>{180} & \textbf<2>{13589544960000} & \textbf<2>{305267893261020841472415498240000} & \textbf<2>{5:02.7} \\ \midrule
+\textbf<3>{3} & \textbf<3>{4} & \textbf<3>{36} & \textbf<3>{126} & \textbf<3>{262144} & \begin{tabular}[c]{@{}r@{}}\textbf<3>{5435817984}\\ \textbf<3>{32614907904}\\ \textbf<3>{32614907904}\\ \textbf<3>{5435817984}\end{tabular} & \textbf<3>{2.4} \\ \midrule
+\textbf<4>{4} & \textbf<4>{3} & \textbf<4>{240} & \textbf<4>{480} & \textbf<4>{1} & \begin{tabular}[c]{@{}r@{}}\textbf<4>{12779520}\\ \textbf<4>{17031168}\\ \textbf<4>{16220160}\end{tabular} & \textbf<4>{32:50.6} \\ \midrule
+5 & 3 & 86 & 165 & \begin{tabular}[c]{@{}r@{}}16\\ 4\\ 6\end{tabular} & \begin{tabular}[c]{@{}r@{}}9277129359360\\ 1307993702400\\ 2231764254720\end{tabular} & 2:44.3 \\ \midrule
+\uncover<5->{- & 1 & 298 & 297 & 210357201231685877760000 & \begin{tabular}[c]{@{}r@{}}9587292865845886180...\\ 9541639114720040295...\\ 52885047052206080000\end{tabular} & 53:42.5 \\ \bottomrule}
+\end{tabular}
+}
+\end{table}
+\end{frame}

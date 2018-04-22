@@ -1,0 +1,83 @@
+\subsection{Number of automorphisms}
+% \begin{frame}{Counting Automorphisms}
+
+% Brute force approach:
+% \begin{enumerate}
+%     \item Compute all leaves of the tree
+%     \item Count leaves that result in a unique permutation
+% \end{enumerate}
+
+% Idea: don't determine each possible permutation, but use generating sets
+% \end{frame}
+
+\begin{frame}{Counting automorphisms}
+    \begin{center}
+        \input{num_auto_files/graph1.tex}
+        \input{num_auto_files/tree_example.tex}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Automorphism groups}
+    \uncover<1->{
+        \begin{itemize}
+            \item number automorphisms is a group% under composition
+            \item generating set: subgroup of a group which generates all elements of the group
+            \item generating set can be small for large groups
+            % \item in many cases efficiently calculated
+        \end{itemize}
+    }
+    \uncover<2->{
+        \begin{center}
+        \scalebox{0.7}{
+            \input{num_auto_files/graph1.tex}
+        }
+        \input{num_auto_files/tree_example2.tex}
+        \end{center}
+    }
+\end{frame}
+
+\begin{frame}{Tree pruning}
+\scalebox{0.7}{
+    \input{num_auto_files/graph2.tex}
+}
+\scalebox{0.9}{
+    \input{num_auto_files/tree_generating_set.tex}
+}
+\end{frame}
+
+\begin{frame}{Generating set}
+    \begin{center}
+         \textcolor{orange}{[(6,7), (1,2), (0,8)(3,5)(1,6,2,7)]}
+    \end{center}
+     \begin{itemize}
+        \item order: number of automorphisms
+        \item non-trivial mapping: mapping of a node to another node
+        \item orbit: all possible mappings of a node
+        \item stabilizer: permutations in the set where a node maps to itself
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Compute number of automorphisms}
+    \begin{center}
+    \scalebox{0.7}{
+        \input{num_auto_files/graph2.tex}
+    }
+    \end{center}
+    \begin{table}[]
+        \centering
+        \label{my-label}
+        \begin{tabular}{lll}
+        generating set      & {[}(6,7),(1,2),(0,8)(1,6,2,7)(3,5){]}             & \uncover<3->{{[}(6,7){]}} \\
+        non-trivial mapping & 1                                                 & \uncover<3->{6}           \\
+        orbit               & (1,2,6,7)                                         & \uncover<3->{(6,7)}       \\
+        stabilizer          & {[}(6,7){]}                                       & \uncover<3->{-}           \\
+        order               & length(orbit) $\times$ order of {[}(6,7){]}       & \uncover<3->{length(orbit)}           \\
+                            & \uncover<2->{= 4 $\times$ order of {[}(6,7){]}}   & \uncover<3->{= 2}
+        \end{tabular}
+    \end{table}
+    \uncover<3>{
+        \begin{center}
+            number of automorphisms = 8
+        \end{center}
+    }
+\end{frame}

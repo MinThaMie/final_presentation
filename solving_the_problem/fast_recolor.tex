@@ -1,0 +1,391 @@
+\subsection{Fast colour refinement and branching}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=15pt]
+\newcommand{\vertex}{\node[vertex]}
+
+% % Two simple graphs G and H are isomorphic if there exists a bijective mapping between them. Eg. $$f:V(G) \rightarrow V(H) st. \forall{u,v \in V(G): uv \in E(G) \leftrightarrow f(u)f(v) \in E(H)$$.
+% % The fast colour refinement algorithm uses colours to define this mapping
+
+
+
+% FIRST FLOW FRAME
+\begin{frame}{Fast colour refinement and branching}
+     \tikzstyle{box} = [draw, rectangle, text width=6em, text centered, fill=yellow!20, inner sep=3pt, minimum height=3em]
+     \tikzstyle{cirkel} = [draw, circle, text width=5em, text centered, inner sep=0pt, minimum height=2em]
+     \tikzstyle{test} = [diamond, draw, aspect=2, fill=orange!20, text width = 4em, minimum width = 4cm, minimum height = 2cm, inner sep=1pt, align=center]
+    
+     \begin{center}
+      \begin{tikzpicture}[scale=0.8]
+         \node[box] (init) at (0,3) {Initial colouring};
+         \node[test] (fcr) at (0,0) {Use fast colour refinement};
+         \node[cirkel, fill=red!20, opacity = 0.2](notiso) at (-7, 0){$G$ and $H$ are not isomorphic};
+         \node[cirkel, fill=green!20, opacity = 0.2](iso) at (7,0){$G$ and $H$ are isomorphic};
+        
+         \path [->, thick] (init) edge node {} (fcr);
+         \path [->, thick, opacity = 0.2] (fcr) edge node [text width=4em, below]{unbalanced colouring} (notiso);
+         \path [->, thick, opacity = 0.2] (fcr) edge node [text width=4em, below]{bijective colouring} (iso);
+%         \path [->,thick, opacity = 0.2] (fcr) edge [loop below] node {branch} (fcr);
+     \end{tikzpicture}
+     \end{center}
+\end{frame}
+
+
+% FAST COLOR REFINE EXAMPLE
+\begin{frame}
+% colours [1-red,2-orange,3-green, 4-blue, 5-yellow, 6-gray, 7-pink, 8-brown] 
+\begin{itemize}
+    \only<1>{
+        \item Start with an initial colouring, eg. by degree
+        \item Queue = [red, orange, green, blue]
+    }
+    \only<2>{
+        \item Refine vertices on \textbf{amount of red neighbours}?
+        \item Queue = [\sout{red}, orange, green, blue]
+    }
+    \only<3>{
+        \item Refine orange vertices on \textbf{amount of orange neighbours}
+        \item Queue = [\sout{orange}, green, blue]
+    }
+    \only<4>{
+        \item Recolour orange vertices with 2 orange neighbours
+        \item Queue = [green, blue] $\leftarrow$ \textcolor{orange}{orange}
+    }
+    \only<5>{
+        \item Refine orange vertices on \textbf{amount of green neighbours}
+        \item Queue = [\sout{green}, blue, orange]
+    }
+    \only<6>{
+        \item Recolour orange vertices with no green neighbours
+        \item Queue = [blue, orange] $\leftarrow$ \textcolor{gray}{gray}
+    }
+    \only<7->{
+        \item Repeat these actions until the queue is empty
+        \item Same colours $\rightarrow$ vertices map onto each other
+    }
+\end{itemize}
+
+\quad
+
+\begin{center}
+    \begin{tikzpicture}[scale=.8]
+
+    % GRAPH G
+    \vertex[fill=blue!70](G0_0) at (-1,0){0};
+    \vertex[fill=orange!70](G0_1) at (3,0){1};
+    \vertex[fill=orange!70](G0_10) at (8,-1){10};
+    \vertex[fill=orange!70](G0_11) at (0,0){11};
+    \vertex[fill=orange!70](G0_12) at (4,0){12};
+    \vertex[fill=orange!70](G0_13) at (2,0){13};
+    \vertex[fill=red!70](G0_7) at (-2,0){7};
+    \vertex[fill=orange!70](G0_14) at (1,-1){14};
+    \vertex[fill=orange!70](G0_8) at (0,1){8};
+    \vertex[fill=orange!70](G0_2) at (5,1){2};
+    \vertex[fill=orange!70](G0_3) at (5,-1){3};
+    \vertex[fill=orange!70](G0_4) at (5,0){4};
+    \vertex[fill=orange!70](G0_5) at (2,-1){5};
+    \vertex[fill=green!70](G0_6) at (8,0){6};
+    \vertex[fill=orange!70](G0_9) at (1,0){9};
+    
+    \Edge(G0_0)(G0_7);
+    \Edge(G0_14)(G0_0);
+    \Edge(G0_0)(G0_11);
+    \Edge(G0_0)(G0_8);
+    \Edge(G0_12)(G0_1);
+    \Edge(G0_1)(G0_13);
+    \Edge(G0_2)(G0_8);
+    \Edge(G0_6)(G0_2);
+    \Edge(G0_10)(G0_3);
+    \Edge(G0_5)(G0_3);
+    \Edge(G0_12)(G0_4);
+    \Edge(G0_4)(G0_6);
+    \Edge(G0_10)(G0_6);
+    \Edge(G0_9)(G0_11);
+    \Edge(G0_14)(G0_5);
+    \Edge(G0_13)(G0_9);
+
+    % GRAPH H
+    \vertex[fill=orange!70](G1_0)   at (0,-3){0};
+    \vertex[fill=green!70](G1_13)   at (1,-3){13};
+    \vertex[fill=orange!70](G1_1)   at (3,-4){1};
+    \vertex[fill=orange!70](G1_10)  at (5,-6){10};
+    \vertex[fill=orange!70](G1_11)  at (5,-3){11};
+    \vertex[fill=blue!70](G1_12)    at (4,-3){12};
+    \vertex[fill=orange!70](G1_14)  at (1,-5){14};
+    \vertex[fill=orange!70](G1_2)   at (4,-5){2};
+    \vertex[fill=orange!70](G1_3)   at (0,-5){3};
+    \vertex[fill=orange!70](G1_4)   at (5,-5){4};
+    \vertex[fill=orange!70](G1_5)   at (2,-3){5};
+    \vertex[fill=red!70](G1_6)      at (4,-2){6};
+    \vertex[fill=orange!70](G1_7)   at (2,-4){7};
+    \vertex[fill=orange!70](G1_8)   at (3,-3){8};
+    \vertex[fill=orange!70](G1_9)   at (0,-6){9};
+    
+    \Edge(G1_12)(G1_6);
+    \Edge(G1_8)(G1_12);
+    \Edge(G1_4)(G1_10);
+    \Edge(G1_12)(G1_11);
+    \Edge(G1_3)(G1_0);
+    \Edge(G1_11)(G1_4);
+    \Edge(G1_1)(G1_8);
+    \Edge(G1_5)(G1_7);
+    \Edge(G1_13)(G1_14);
+    \Edge(G1_0)(G1_13);
+    \Edge(G1_14)(G1_2);
+    \Edge(G1_13)(G1_5);
+    \Edge(G1_9)(G1_3);
+    \Edge(G1_7)(G1_1);
+    \Edge(G1_2)(G1_12);
+    \Edge(G1_10)(G1_9);
+    
+
+    % % Refine on red?
+    \only<2>{
+    \begin{pgfonlayer}{background}
+        \draw[rounded corners=1em,line width=1em,blue!20,cap=round]
+            (-1.25,0.25) -- (-0.75,-0.25);
+        \draw[rounded corners=1em,line width=1em,blue!20,cap=round]
+            (3.75,-2.75) -- (4.25,-3.25);
+    \end{pgfonlayer}
+    }
+
+    % % Refine orange on orange
+    \only<3>{
+    \begin{pgfonlayer}{background}
+    % 1: 2,4,8,10,11,14    
+        \draw[rounded corners=1em,line width=1em,orange!30,cap=round]
+            (G0_10.center) -- (G0_4.west) --
+            (G0_2.east) -- (G0_8.west) -- (G0_11.center) -- (G0_14.center);
+    % 2: 1,3,5,9,12,13   
+        \draw[rounded corners=1em,line width=1em,yellow!50,cap=round]
+          (G0_5.center) -- (G0_9.west) -- (G0_13.center) -- (G0_1.center) --
+          (G0_12.center) -- (G0_3.center);
+    % 1: 0,2,5,8,11,14
+        \draw[rounded corners=1em,line width=1em,orange!30,cap=round]
+            (G1_14.center) --
+            (G1_0.center) -- (1,-2) --
+            (G1_5.center) -- (G1_8.north) --
+            (G1_2.center) -- (G1_11.center);
+    % 2: 1,3,4,7,9,10
+        \draw[rounded corners=1em,line width=1em,yellow!50,cap=round]
+            (G1_3.center) -- (G1_9.center) --
+            (2,-6) -- (G1_7.center) --
+            (G1_1.center) -- (3,-6) --
+            (G1_10.center) -- (G1_4.center);
+    \end{pgfonlayer}
+    }
+    \uncover<4->{
+        \vertex[fill=yellow!70](G0_1) at (3,0){1};
+        \vertex[fill=yellow!70](G0_12) at (4,0){12};
+        \vertex[fill=yellow!70](G0_13) at (2,0){13};
+        \vertex[fill=yellow!70](G0_3) at (5,-1){3};
+        \vertex[fill=yellow!70](G0_5) at (2,-1){5};
+        \vertex[fill=yellow!70](G0_9) at (1,0){9};
+        
+        \vertex[fill=yellow!70](G1_10) at (5,-6){10};   
+        \vertex[fill=yellow!70](G1_1) at (3,-4){1};
+        \vertex[fill=yellow!70](G1_4) at (5,-5){4};   
+        \vertex[fill=yellow!70](G1_7) at (2,-4){7};   
+        \vertex[fill=yellow!70](G1_3) at (0,-5){3};
+        \vertex[fill=yellow!70](G1_9) at (0,-6){9};
+    }
+    
+
+    % Refine orange on green
+    \only<5>{
+    \begin{pgfonlayer}{background}
+     % 1: 2,4,10  
+        \draw[rounded corners=1em,line width=1em,orange!30,cap=round]
+            (G0_2.center) -- (G0_4.center) -- (G0_10.center);
+     % 2: 8,11,14
+        \draw[rounded corners=1em,line width=1em,gray!30,cap=round]
+          (G0_8.center) -- (G0_11.center) -- (G0_14.center);
+    % 1: 0,5,14
+        \draw[rounded corners=1em,line width=1em,orange!30,cap=round]
+            (G1_0.center) -- (G1_14.center) -- (G1_5.center);
+     % 2: 2,8,11
+        \draw[rounded corners=1em,line width=1em,gray!30,cap=round]
+          (G1_8.center) -- (G1_2.center) -- (G1_11.center);
+    \end{pgfonlayer}
+    }
+    \uncover<6->{
+        \vertex[fill=gray!70](G0_11) at (0,0){11};
+        \vertex[fill=gray!70](G0_14) at (1,-1){14};
+        \vertex[fill=gray!70](G0_8) at (0,1){8};
+        \vertex[fill=gray!70](G1_11) at (5,-3){11};
+        \vertex[fill=gray!70](G1_2) at (4,-5){2};
+        \vertex[fill=gray!70](G1_8) at (3,-3){8};
+    }
+    % REPEAT
+    \uncover<7->{
+        \vertex[fill=pink!70](G0_12) at (4,0){12};
+        \vertex[fill=brown!70](G0_8) at (0,1){8};
+        
+        \vertex[fill=olive!70](G0_5) at (2,-1){5};
+        \vertex[fill=violet!70](G0_3) at (5,-1){3};
+        \vertex[fill=lime!70](G0_9) at (1,0){9};
+        \vertex[fill=blue!30](G0_4) at (5,0){4};
+        \vertex[fill=magenta!70](G0_13) at (2,0){13};
+        \vertex[fill=orange!50!gray!20](G0_10) at (8,-1){10};
+        \vertex[fill=green!30](G0_11) at (0,0){11};
+        
+        \vertex[fill=pink!70](G1_3) at (0,-5){3};
+        \vertex[fill=brown!70](G1_2) at (4,-5){2};
+        
+        \vertex[fill=olive!70](G1_1) at (3,-4){1};
+        \vertex[fill=violet!70](G1_7) at (2,-4){7};
+        \vertex[fill=lime!70](G1_4) at (5,-5){4};
+        \vertex[fill=blue!30](G1_0) at (0,-3){0};
+        \vertex[fill=magenta!70](G1_10) at (5,-6){10};
+        \vertex[fill=orange!50!gray!20](G1_5) at (2,-3){5};
+        \vertex[fill=green!30](G1_11) at (5,-3){11};
+    }
+
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+% FLOW PART 2
+\begin{frame}{Colour refinement flow}
+     \tikzstyle{box} = [draw, rectangle, text width=6em, text centered, fill=yellow!20, inner sep=3pt, minimum height=2em]
+     \tikzstyle{cirkel} = [draw, circle, text width=5em, text centered, inner sep=0pt, minimum height=2em]
+     \tikzstyle{test} = [diamond, draw, aspect=2, fill=orange!20, text width = 4em, minimum width = 4cm, minimum height = 2cm, inner sep=1pt, align=center]
+     \begin{center}
+     \begin{tikzpicture}[scale=0.8]
+       \uncover<1>{\node[box] (init) at (0,3) {Initial colouring};}
+       \node[test] (fcr) at (0,0) {Use fast colour refinement};
+        \only<1>{\node[cirkel, fill=red!20](notiso) at (-7, 0){$G$ and $H$ are not isomorphic};
+                       \node[cirkel, fill=green!20](iso) at (7,0){$G$ and $H$ are isomorphic};}
+       \only<2>{\node[cirkel, fill=red!20, opacity = 0.2](notiso) at (-7, 0){$G$ and $H$ are not isomorphic};
+                \node[cirkel, fill=green!20, opacity = 0.2](iso) at (7,0){$G$ and $H$ are isomorphic};}
+       \uncover<1>{\path [->, thick] (init) edge node {} (fcr);}
+       \only<1>{\path [->, thick] (fcr) edge node [text width=4em, below]{unbalanced colouring} (notiso);
+                \path [->, thick] (fcr) edge node [text width=4em, below]{bijective colouring} (iso);}
+       \only<2>{\path [->, thick, opacity = 0.2] (fcr) edge node [text width=4em, below]{unbalanced colouring} (notiso);
+                \path [->, thick, opacity = 0.2] (fcr) edge node [text width=4em, below]{bijective colouring} (iso);}
+       \uncover<2->{\path [->,thick] (fcr) edge [loop below] node {branch} (fcr);}
+     \end{tikzpicture}
+     \end{center}
+\end{frame}
+% EXAMPLE BRANCHING
+\begin{frame}{Branching}
+Sometimes fast colour refinement results in a balanced non-bijective colouring.
+\begin{itemize}
+    \item There are multiple possible mappings
+    \uncover<2->{\item Pick a colour class with at least 4 vertices}
+    \uncover<3->{\item Pick a vertex from G (eg. G0)}
+    \uncover<4->{\item Branch on vertices of H}
+\end{itemize}
+
+\begin{center}\begin{tikzpicture}[scale=0.8]
+    \uncover<1-3>{
+        \node(G) at (-2,0){G:};
+        \node(H) at (-2,-2){H:};
+    }
+
+    \vertex[fill=blue!70](G0_0) at (0,0){0};
+    \vertex[fill=orange!70](G0_1) at (1,0){1};
+    \vertex[fill=green!70](G0_2) at (2,0){2};
+    \vertex[fill=yellow!70](G0_3) at (2,-1){3};
+    \vertex[fill=green!70](G0_4) at (3,0){4};
+    \vertex[fill=orange!70](G0_5) at (4,0){5};
+    \vertex[fill=blue!70](G0_6) at (5,0){6};
+    \Edge(G0_1)(G0_0);
+    \Edge(G0_2)(G0_1);
+    \Edge(G0_3)(G0_2);
+    \Edge(G0_4)(G0_3);
+    \Edge(G0_4)(G0_2);
+    \Edge(G0_5)(G0_4);
+    \Edge(G0_6)(G0_5);
+    
+    \uncover<1-3>{
+        \vertex[fill=green!70](G2_0) at (3,-2){0};
+        \vertex[fill=blue!70](G2_1) at (0,-2){1};
+        \vertex[fill=blue!70](G2_2) at (4,-3){2};
+        \vertex[fill=orange!70](G2_3) at (1,-2){3};
+        \vertex[fill=yellow!70](G2_4) at (2,-3){4};
+        \vertex[fill=green!70](G2_5) at (2,-2){5};
+        \vertex[fill=orange!70](G2_6) at (3,-3){6};
+        \Edge(G2_3)(G2_1);
+        \Edge(G2_5)(G2_3);
+        \Edge(G2_5)(G2_0);
+        \Edge(G2_4)(G2_0);
+        \Edge(G2_5)(G2_4);
+        \Edge(G2_6)(G2_0);
+        \Edge(G2_6)(G2_2);
+    }
+   
+    \only<2>{
+        \begin{pgfonlayer}{background}
+            \draw[rounded corners=1em,line width=1em,blue!20,cap=round]
+                (G0_0.center) -- (G2_1.center) --
+                (0,-4) -- (4,-4) --
+                (G2_2.center) -- (G0_6.center);
+        \end{pgfonlayer}
+    }
+    \uncover<3->{
+        \vertex[fill=blue!30](G0_0) at (0,0){0};
+    }
+    \uncover<4->{
+        \node(G) at (-4,0){G:};
+        \node(H) at (-4,-3){H:};
+    
+      \vertex[fill=green!70](G2_0) at (0,-3){0};
+      \vertex[fill=blue!30](G2_1) at (-3,-3){1};
+      \vertex[fill=blue!70](G2_2) at (1,-4){2};
+      \vertex[fill=orange!70](G2_3) at (-2,-3){3};
+      \vertex[fill=yellow!70](G2_4) at (-1,-4){4};
+      \vertex[fill=green!70](G2_5) at (-1,-3){5};
+      \vertex[fill=orange!70](G2_6) at (0,-4){6};
+      \Edge(G2_3)(G2_1);
+      \Edge(G2_5)(G2_3);
+      \Edge(G2_5)(G2_0);
+      \Edge(G2_4)(G2_0);
+      \Edge(G2_5)(G2_4);
+      \Edge(G2_6)(G2_0);
+      \Edge(G2_6)(G2_2);
+       
+      \vertex[fill=green!70](2_0) at (6,-3){0};
+      \vertex[fill=blue!70](2_1) at (3,-3){1};
+      \vertex[fill=blue!30](2_2) at (7,-4){2};
+      \vertex[fill=orange!70](2_3) at (4,-3){3};
+      \vertex[fill=yellow!70](2_4) at (5,-4){4};
+      \vertex[fill=green!70](2_5) at (5,-3){5};
+      \vertex[fill=orange!70](2_6) at (6,-4){6};
+      \Edge(2_3)(2_1);
+      \Edge(2_5)(2_3);
+      \Edge(2_5)(2_0);
+      \Edge(2_4)(2_0);
+      \Edge(2_5)(2_4);
+      \Edge(2_6)(2_0);
+      \Edge(2_6)(2_2);
+       
+      \path[->, thick] (1,-1.5) edge node [above left, midway]{pick H1 (branch1)} (0.5,-2);
+      \path[->, thick] (3,-1.5) edge node[above right, midway] {pick H2 (branch2)} (3.5,-2);
+    }
+   
+\end{tikzpicture}
+\end{center}
+\end{frame}
+\begin{frame}{Colour refinement flow}
+     \tikzstyle{box} = [draw, rectangle, text width=6em, text centered, fill=yellow!20, inner sep=3pt, minimum height=3em]
+          \tikzstyle{cirkel} = [draw, circle, text width=5em, text centered, inner sep=0pt, minimum height=2em]
+          \tikzstyle{test} = [diamond, draw, aspect=2, fill=orange!20, text width = 4em, minimum width = 4cm, minimum height = 2cm, inner sep=1pt, align=center]
+
+          \begin{center}
+           \begin{tikzpicture}[scale=0.8]
+              \node[box] (init) at (0,3) {Initial colouring};
+              \node[test] (fcr) at (0,0) {Use fast colour refinement};
+              \node[cirkel, fill=red!20](notiso) at (-7, 0){$G$ and $H$ are not isomorphic};
+              \node[cirkel, fill=green!20](iso) at (7,0){$G$ and $H$ are isomorphic};
+
+              \path [->, thick] (init) edge node {} (fcr);
+              \path [->, thick] (fcr) edge node [text width=4em, below]{unbalanced colouring} (notiso);
+              \path [->, thick] (fcr) edge node [text width=4em, below]{bijective colouring} (iso);
+              \path [->,thick] (fcr) edge [loop below] node {branch} (fcr);
+          \end{tikzpicture}
+          \end{center}
+\end{frame}

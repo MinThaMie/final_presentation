@@ -1,0 +1,35 @@
+%\subsection*{Processing pipeline}
+\subsection*{}
+\begin{frame}<1-2>[label=processing-overview]{Processing pipeline overview}
+    \tikzstyle{cloud} = [circle, draw, text width=5em, text centered]
+    \tikzstyle{line} = [draw, -\darkarrow, thick]
+    \tikzstyle{block} = [draw, rectangle, fill = red!20, text width = 4cm, text centered, minimum height = 3cm]
+    
+    \adjustbox{max width = \textwidth}{
+        \begin{tikzpicture}[node distance = 1.5cm]
+            \node<-2> [cloud, fill = blue!20] (graphs) {Set of graphs};
+            \node<3-> [opacity = .2, cloud, fill = blue!20] (graphs) {Set of graphs};
+            
+            \node<1> [block, right = of graphs] (proiso) {Process graphs pairwise into isomorphic groups};
+            \node<2> [block, right = of graphs, line width = 0.5mm] (proiso) {Process graphs pairwise into isomorphic groups};
+            \node<3-> [opacity = .2, block, right = of graphs] (proiso) {Process graphs pairwise into isomorphic groups};
+            
+            \node<1> [block, right = of proiso] (proauto) {Calculate number of authomorphisms of one graph per isomorphic group};
+            \node<3> [block, right = of proiso, line width = 0.5mm] (proauto) {Calculate number of authomorphisms of one graph per isomorphic group};
+            \node<2, 4-> [block, opacity=0.2, right = of proiso] (proauto) {Calculate number of authomorphisms of one graph per isomorphic group};
+            
+            \node<1> [cloud, fill = green!20, right = of proauto] (results) {Results};
+            \node<4> [cloud, fill = green!20, right = of proauto, line width = 0.5mm] (results) {Results};
+            \node<2-3> [cloud, opacity = .2, fill = green!20, right = of proauto] (results) {Results};
+            
+            \path<-2> [line] (graphs) -- (proiso);
+            \path<3-> [opacity = .2, line] (graphs) -- (proiso);
+            
+            \path<1, 3> [line] (proiso) -- (proauto);
+            \path<2, 4> [opacity = .2, line] (proiso) -- (proauto);
+            
+            \path<1, 4> [line] (proauto) -- (results);
+            \path<2-3> [opacity = .2, line] (proauto) -- (results);
+        \end{tikzpicture}
+    }
+\end{frame}

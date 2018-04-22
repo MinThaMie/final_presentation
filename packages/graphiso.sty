@@ -1,0 +1,136 @@
+%% graphiso.sty
+%% Copyright 2012 Rafael Villarroel <rvf0068@gmail.com>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Rafael Villarroel.
+%
+% This work consists of the files graphiso.sty, simple-example.tex,
+% petersen.tex, README.org
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{packages/graphiso}[2012/04/13 Graph isomorphisms in a beamer presentation]
+
+\RequirePackage{tkz-graph}
+\RequirePackage{tkz-berge}
+
+
+\define@cmdkey [GR] {MVx} {xa}{}
+\define@cmdkey [GR] {MVx} {xb}{}
+\define@cmdkey [GR] {MVx} {ya}{}
+\define@cmdkey [GR] {MVx} {yb}{}
+\define@cmdkey [GR] {MVx} {shows}{}
+\define@cmdkey [GR] {MVx} {starts}{}
+\define@cmdkey [GR] {MVx} {stops}{}
+
+\presetkeys    [GR] {MVx} {xa     = 0,
+                           ya     = 0,
+                           xb     = 2,
+                           yb     = 2,
+                           shows  = 1,
+                           starts = 1,
+                           stops  = 10}{}
+
+\define@cmdkey [GR] {MEe} {bends}{}
+\define@cmdkey [GR] {MEe} {bendsfrom}{}
+\define@cmdkey [GR] {MEe} {shows}{}
+\define@cmdkey [GR] {MEe} {starts}{}
+\define@cmdkey [GR] {MEe} {stops}{}
+\presetkeys    [GR] {MEe} {bends     = left,
+                           bendsfrom = 60,
+                           shows     = 1,
+                           starts    = 1,
+                           stops     = 10}{}
+
+%%%% the following code is by Andrew Stacey, see
+%%%% http://tex.stackexchange.com/a/51638/250
+\newcounter{jumping}
+\resetcounteronoverlays{jumping}
+
+\tikzset{
+  stop jumping/.style={
+    execute at end picture={%
+      \stepcounter{jumping}%
+      \immediate\write\pgfutil@auxout{%
+        \noexpand\jump@setbb{\the\value{jumping}}{\noexpand\pgfpoint{\the\pgf@picminx}{\the\pgf@picminy}}{\noexpand\pgfpoint{\the\pgf@picmaxx}{\the\pgf@picmaxy}}
+      },
+      \csname jump@\the\value{jumping}@maxbb\endcsname
+      \path (\the\pgf@x,\the\pgf@y);
+      \csname jump@\the\value{jumping}@minbb\endcsname
+      \path (\the\pgf@x,\the\pgf@y);
+    },
+  }
+}
+\def\jump@setbb#1#2#3{%
+  \@ifundefined{jump@#1@maxbb}{%
+    \expandafter\gdef\csname jump@#1@maxbb\endcsname{#3}%
+  }{%
+    \csname jump@#1@maxbb\endcsname
+    \pgf@xa=\pgf@x
+    \pgf@ya=\pgf@y
+    #3
+    \pgfmathsetlength\pgf@x{max(\pgf@x,\pgf@xa)}%
+    \pgfmathsetlength\pgf@y{max(\pgf@y,\pgf@ya)}%
+    \expandafter\xdef\csname jump@#1@maxbb\endcsname{\noexpand\pgfpoint{\the\pgf@x}{\the\pgf@y}}%
+  }
+  \@ifundefined{jump@#1@minbb}{%
+    \expandafter\gdef\csname jump@#1@minbb\endcsname{#2}%
+  }{%
+    \csname jump@#1@minbb\endcsname
+    \pgf@xa=\pgf@x
+    \pgf@ya=\pgf@y
+    #2
+    \pgfmathsetlength\pgf@x{min(\pgf@x,\pgf@xa)}%
+    \pgfmathsetlength\pgf@y{min(\pgf@y,\pgf@ya)}%
+    \expandafter\xdef\csname jump@#1@minbb\endcsname{\noexpand\pgfpoint{\the\pgf@x}{\the\pgf@y}}%
+  }
+}
+%%%% end 
+
+\newcommand{\VertexM}[2][]{%
+  \begingroup
+  \setkeys[GR]{MVx}{#1}%
+  \edef\x@start{\cmdGR@MVx@xa}
+  \edef\y@start{\cmdGR@MVx@ya}
+  \edef\x@final{\cmdGR@MVx@xb}
+  \edef\y@final{\cmdGR@MVx@yb}
+  \edef\Vx@appears{\cmdGR@MVx@shows}
+  \edef\Vx@StartsMoving{\cmdGR@MVx@starts}
+  \edef\Vx@StopsMoving{\cmdGR@MVx@stops}
+  \pgfmathsetmacro{\last@still}{\Vx@StartsMoving-1}
+  \foreach\x in {\Vx@appears,...,\last@still}{%
+    \only<\x>{\Vertex[x=\x@start,y=\y@start]{#2}}
+  }
+  \foreach\x in {\Vx@StartsMoving,...,\Vx@StopsMoving}{%
+    \pgfmathsetmacro{\lambdapar}%
+    {(1/(\Vx@StopsMoving-\Vx@StartsMoving))*(\x-\Vx@StartsMoving)}
+    \pgfmathsetmacro{\pos@x}{(1-\lambdapar)*\x@start+\lambdapar*\x@final}
+    \pgfmathsetmacro{\pos@y}{(1-\lambdapar)*\y@start+\lambdapar*\y@final}
+    \only<\x>{\Vertex[x=\pos@x,y=\pos@y]{#2}}
+  }
+  \endgroup
+}
+
+\newcommand{\EdgeM}[3][]{%
+  \begingroup
+  \setkeys[GR]{MEe}{#1}%
+  \pgfmathsetmacro{\last@still}{\cmdGR@MEe@starts-1}
+  \foreach\x in {\cmdGR@MEe@shows,...,\last@still}{%
+    \only<\x>{\Edge[style={bend \cmdGR@MEe@bends=\cmdGR@MEe@bendsfrom}](#2)(#3)}
+  }
+  \foreach\x in {\cmdGR@MEe@starts,...,\cmdGR@MEe@stops}{%
+    \pgfmathsetmacro{\the@bend}%
+    {(\cmdGR@MEe@bendsfrom/%
+      (\cmdGR@MEe@starts-\cmdGR@MEe@stops))*(\x-\cmdGR@MEe@stops)}
+    \only<\x>{\Edge[style={bend \cmdGR@MEe@bends=\the@bend}](#2)(#3)}
+  }
+  \endgroup
+}

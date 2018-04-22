@@ -1,0 +1,127 @@
+\subsection{Modular decomposition}
+\begin{frame}{Modular decomposition}
+    \begin{itemize}
+        \item Simplify graph by grouping similar vertices, i.\,e.\ modules, into one vertex
+        \uncover<2->{\item Vertices are grouped by neighbourhood}
+    \end{itemize}
+    \uncover<3->{
+        \begin{center}
+            \begin{tikzpicture}
+                \Vertex[x=-6, y=0]{1}
+                \Vertex[x=-3, y=0]{3}
+                \Vertex[x=0, y=0]{5}
+                \Vertex[x=3, y=0]{11}
+                
+                \uncover<3-8>{
+                    \Vertex[x=-7.5, y=1]{0}
+                    \Vertex[x=-7.5, y=-1]{10}
+                    \Edge(0)(1)
+                    \Edge(10)(1)
+                }
+                
+                \uncover<3-9>{
+                    \Vertex[x=-4.5, y=1]{2}
+                    \Vertex[x=-4.5, y=-1]{9}
+                    \Edge(2)(1)
+                    \Edge(9)(1)
+                    \Edge(2)(9)
+                    \Edge(2)(3)
+                    \Edge(9)(3)
+                }
+                
+                \uncover<3-10>{
+                    \Vertex[x=-1.5, y=1]{4}
+                    \Vertex[x=-1.5, y=-1]{8}
+                    \Edge(4)(3)
+                    \Edge(3)(8)
+                    \Edge(4)(5)
+                    \Edge(8)(5)
+                }
+                
+                \uncover<3-11>{
+                    \Vertex[x=1.5, y=1]{6}
+                    \Vertex[x=1.5, y=-1]{7}
+                    \Edge(6)(5)
+                    \Edge(7)(5)
+                    \Edge(6)(7)
+                    \Edge(6)(11)
+                    \Edge(7)(11)
+                }
+                
+                \uncover<3-12>{
+                    \Vertex[x=4.5, y=1]{12}
+                    \Vertex[x=4.5, y=-1]{14}
+                    \Vertex[x=6, y=0]{13}
+                    \Edge(11)(12)
+                    \Edge(11)(14)
+                    \Edge(11)(13)
+                    \Edge(12)(14)
+                    \Edge(12)(13)
+                    \Edge(13)(14)
+                }
+                
+                \uncover<4-8>{
+                    \draw[green, rounded corners=10pt, line width=2pt] (-8,-2) rectangle (-7,2);
+                }
+                
+                \uncover<5-9>{
+                    \draw[red, rounded corners=10pt, line width=2pt] (-5,-2) rectangle (-4,2);
+                }
+                
+                \uncover<6-10>{
+                    \draw[green, rounded corners=10pt, line width=2pt] (-2,-2) rectangle (-1,2);
+                }
+                
+                \uncover<7-11>{
+                    \draw[red, rounded corners=10pt, line width=2pt] (1,-2) rectangle (2,2);
+                }
+                
+                \uncover<8-12>{
+                    \draw[blue, rounded corners=10pt, line width=2pt] (3.75,-2) rectangle (6.5,2);
+                }
+                
+                \newcommand{\oldVertexLineWidth}{\VertexLineWidth}
+                \newcommand{\oldVertexLineColor}{\VertexLineColor}
+                
+                \renewcommand*{\VertexLineWidth}{1.6pt}
+                
+                \uncover<9->{
+                    \renewcommand*{\VertexLineColor}{green}
+                    \WE[unit=1.5, Math, L={0||10}](1){MD1+10}
+                    \Edge(1)(MD1+10)
+                }
+                
+                \uncover<10->{
+                    \renewcommand*{\VertexLineColor}{red}
+                    \WE[unit=1.5, L={2--9}](3){MD2+9}
+                    \Edge(1)(MD2+9)
+                    \Edge(3)(MD2+9)
+                }
+                
+                \uncover<11->{
+                    \renewcommand*{\VertexLineColor}{green}
+                    \WE[unit=1.5, Math, L={4||8}](5){MD4+8}
+                    \Edge(3)(MD4+8)
+                    \Edge(5)(MD4+8)
+                }
+                
+                \uncover<12->{
+                    \renewcommand*{\VertexLineColor}{red}
+                    \WE[unit=1.5, L={6--7}](11){MD6+7}
+                    \Edge(5)(MD6+7)
+                    \Edge(11)(MD6+7)
+                }
+                
+                \uncover<13->{
+                    \renewcommand*{\VertexLineColor}{blue}
+                    \EA[unit=2, L={12--13--14}](11){MD12+13+14}
+                    \Edge(11)(MD12+13+14)
+                }
+                
+                \renewcommand*{\VertexLineColor}{\oldVertexLineColor}
+                \renewcommand*{\VertexLineWidth}{\oldVertexLineWidth}
+            \end{tikzpicture}
+        \end{center}
+    }
+    \uncover<14->{\centering \raisebox{-.5ex}{\HandRight} This is a tree, albeit a linear one \raisebox{-.5ex}{\HandLeft}\\[3em]}
+\end{frame}

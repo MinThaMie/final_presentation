@@ -1,0 +1,17 @@
+\begin{forest}
+    leaf/.style={font=\bfseries}
+    [{()}, delay={where content={}{shape=coordinate}{}}
+        [{()}, edge label={node[midway,left,font=\scriptsize]{1$\rightarrow$1}}
+            [{()},edge label={node[midway,left,font=\scriptsize]{2$\rightarrow$2}}
+            ]   
+            [{\textcolor{orange}{(2,3)}},edge label={node[midway,right,font=\scriptsize]{2$\rightarrow$3}}
+            ]
+        ]
+        [{(1,4)(0,5)},edge label={node[midway,right,font=\scriptsize]{1$\rightarrow$4}}
+            [\textcolor{orange}{(1,4)(0,5)},edge label={node[midway,left,font=\scriptsize]{2$\rightarrow$2}}
+            ]
+            [{(1,4)(0,5)(2,3)},edge label={node[midway,right,font=\scriptsize]{2$\rightarrow$3}}
+            ]
+        ]
+    ]
+\end{forest}

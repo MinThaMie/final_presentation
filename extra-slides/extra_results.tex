@@ -1,0 +1,56 @@
+\subsection*{Results after improvements}
+\begin{frame}{Results of the basic graphs - improved}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrrrrrr@{}}
+\toprule
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}file\\ name\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}MD\\ factor\end{tabular}} & \multicolumn{2}{c}{after MD} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}isomorphic\\ graphs\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}number of\\ automorphisms\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ (sec)\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ improved (sec)\end{tabular}} \\
+ &  &  &  &  & order & size &  &  &  &  \\ \midrule
+basicAut1.gr & 1 & 35 & 34 & 576 & 27 & 26 & -- & 2304 & 0.037 & 0.016 \\ \midrule
+basicAut2.gr & 1 & 69 & 96 & 1 & - & - & -- & 128 & 1.554 & 0.146 \\ \midrule
+basicGI1.grl & 4 & 147 & 857 & 1 & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 2]$\\ $[1, 3]$\end{tabular} & -- & 10.678 & 1.843 \\ \midrule
+basicGI2.grl & 4 & 40 & 60 & 1 & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 2]$\\ $[1, 3]$\end{tabular} & -- & 6.179 & 3.550 \\ \midrule
+basicGI3.grl & 7 & 32 & 80 & 1 & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}-\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 2, 6]$\\ $[1, 3, 4, 5]$\end{tabular} & -- & 1.813 & 1.700 \\ \midrule
+basicGIAut.grl & 9 & 40 & 75 & 1 & \begin{tabular}[c]{@{}r@{}}-\\ -\\ -\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}-\\ -\\ -\\ -\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 5, 7]$\\ $[1, 6]$\\ $[2, 3]$\\ $[4, 8]$\end{tabular} & \begin{tabular}[c]{@{}r@{}}10\\ 20\\ 20\\ 10\end{tabular} & 3.719 & 2.573 \\ \bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Results of the bonus graph isomorphism problems - improved}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}file\\ nr\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}MD\\ factor\end{tabular}} & \multicolumn{2}{c}{after MD} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}isomorphic\\ graphs\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ (min:sec)\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ improved (min:sec)\end{tabular}} \\
+ &  &  &  &  & order & size &  &  &  \\ \midrule
+1 & 8 & 52 & $\{762, 858\}$ & \begin{tabular}[c]{@{}r@{}}67108864\\ 4403012567040000\\ 543581798400\\ 4403012567040000\end{tabular} & \begin{tabular}[c]{@{}r@{}}26\\ 18\\ 22\\ 18\end{tabular} & \begin{tabular}[c]{@{}r@{}}18\\ 50$^*$\\ 143\\ 103\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 7]$\\ $[1, 6]$\\ $[2, 4]$\\ $[3, 5]$\end{tabular} & 0.928 & 0.611 \\ \midrule
+2 & 12 & 64 & 204 & \begin{tabular}[c]{@{}r@{}}86973087744\\ 67108864\\ 5706304286883840000\\ 4403012567040000\\ 704482010726400\\ 5706304286883840000\end{tabular} & \begin{tabular}[c]{@{}r@{}}30\\ 38\\ 22\\ 30\\ 26\\ 22\end{tabular} & \begin{tabular}[c]{@{}r@{}}45\\ 61\\ 25\\ 41\\ 33\\ 25\end{tabular} & \begin{tabular}[c]{@{}r@{}}$[0, 3]$\\ $[1, 4]$\\ $[2 ,9]$\\ $[5, 10]$\\ $[6, 7]$\\ $[8, 11]$\end{tabular} & 0.438 & 0.305 \\ \midrule
+3 & 4 & 627 & 6777 & 1 & - & - & $[0, 3]$, $[1, 2]$ & 15:46.585 & 58.621 \\ \midrule
+4 & 6 & 80 & 120 & 1 & - & - & $[0, 2, 3, 4]$, $[1, 5]$ & 6:27.488 & 3:01:330 \\ \midrule
+5 & 8 & 300 & 300 & 1 & - & - & $[0, 2]$, $[1, 3]$, $[4, 6]$, $[5, 7]$ & 1.549 & 1.559 \\ \bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Results of the bonus automorphism problems - improved}
+\begin{table}[]
+\centering
+\adjustbox{max height=\dimexpr\textheight-\dy\relax,max width=\textwidth}{
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}file\\ nr\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}number\\ of graphs\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ order\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}graph\\ size\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}MD\\ factor\end{tabular}} & \multicolumn{2}{c}{after MD} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}number of\\ automorphisms\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ (min:sec)\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}r@{}}time to solve\\ improved (min:sec)\end{tabular}} \\
+ &  &  &  &  & order & size &  &  &  \\ \midrule
+1 & 1 & 995 & 994 & 1 & - & - & 3538944 & 27:36.511 & ? \\ \midrule
+2 & 1 & 181 & 180 & 13589544960000 & 149 & 148 & 305267893261020841472415498240000 & 5:02.722 & 32.111 \\ \midrule
+3 & 4 & 36 & 126 & 262144 & 18 & 27 & \begin{tabular}[c]{@{}r@{}}5435817984\\ 32614907904\\ 32614907904\\ 5435817984\end{tabular} & 2.421 & 1.356 \\ \midrule
+4 & 3 & 240 & 480 & 1 & - & - & \begin{tabular}[c]{@{}r@{}}12779520\\ 17031168\\ 16220160\end{tabular} & 32:50.569 & 10:42.775 \\ \midrule
+5 & 3 & 86 & 165 & \begin{tabular}[c]{@{}r@{}}16\\ 4\\ 6\end{tabular} & \begin{tabular}[c]{@{}r@{}}82\\ 84\\ 84\end{tabular} & \begin{tabular}[c]{@{}r@{}}155\\ 160\\ 160\end{tabular} & \begin{tabular}[c]{@{}r@{}}9277129359360\\ 1307993702400\\ 2231764254720\end{tabular} & 2:44.286 & 36.878 \\ \midrule
+- & 1 & 298 & 297 & 210357201231685877760000 & 244 & 243 & \begin{tabular}[c]{@{}r@{}}9587292865845886180...\\ 9541639114720040295...\\ 52885047052206080000\end{tabular} & 53:42.532 & 6:29.500 \\ \bottomrule
+\end{tabular}
+}
+\end{table}    
+\end{frame}

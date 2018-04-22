@@ -1,0 +1,39 @@
+\begin{forest}
+    leaf/.style={font=\bfseries}
+    [{()}, delay={where content={}{shape=coordinate}{}}
+        [{()},edge=orange, edge label={node[midway,left,font=\scriptsize]{0$\rightarrow$0}}
+            [{()},edge=orange,edge label={node[midway,left,font=\scriptsize]{3$\rightarrow$3}}
+                [{()},edge=orange,edge label={node[midway,left,font=\scriptsize]{1$\rightarrow$1}}
+                    [{()},leaf, edge label={node[midway,left,font=\scriptsize]{6$\rightarrow$6}}]
+                    [{\textcolor{orange}{(6,7)}},leaf,edge=orange,edge label={node[midway,right,font=\scriptsize]{6$\rightarrow$7}}]
+                ]
+                [{(1,2)},edge=orange,edge label={node[midway,right,font=\scriptsize]{1$\rightarrow$2}}
+                    [{\textcolor{orange}{(1,2)}},leaf,edge=orange,edge label={node[midway,left,font=\scriptsize]{6$\rightarrow$6}}]
+                    [{(1,2)(6,7)},leaf,edge label={node[midway,right,font=\scriptsize]{6$\rightarrow$7}}]
+                ]
+            ]   
+            [{(3,5)},edge label={node[midway,right,font=\scriptsize]{3$\rightarrow$5}}
+                [, edge=dashed
+                    [-,leaf, edge=dashed]
+                ]
+            ]
+        ]
+        [{(0,8)},edge=orange,edge label={node[midway,right,font=\scriptsize]{0$\rightarrow$8}}
+            [{(0,8)},edge label={node[midway,left,font=\scriptsize]{3$\rightarrow$3}}
+                [, edge=dashed
+                    [-,leaf, edge=dashed]
+                ]
+            ]
+            [{(0,8)(3,5)},edge=orange,edge label={node[midway,right,font=\scriptsize]{3$\rightarrow$5}}
+                [{(0,8)(3,5)(1,6)(2,7)},edge=orange,edge label={node[midway,right,font=\scriptsize]{1$\rightarrow$6}}
+                    [{\textcolor{orange}{(0,8)(3,5)}\\\textcolor{orange}{(1,6,2,7)}},leaf,align=center,edge=orange,edge label={node[midway,left,font=\scriptsize]{6$\rightarrow$2}}]
+                    [{(0,8)(3,5)\\(1,6)(2,7)},leaf,align=center,edge label={node[midway,left,font=\scriptsize]{6$\rightarrow$1}}]
+                ]
+                [{(0,8)(3,5)(1,7)(2,6)},edge label={node[midway,right,font=\scriptsize]{1$\rightarrow$7}}
+                    [{(0,8)(3,5)\\(1,7,2,6)},leaf,align=center,edge label={node[midway,left,font=\scriptsize]{6$\rightarrow$1}}]
+                    [{(0,8)(3,5)\\(1,7)(2,6)},leaf,align=center,edge label={node[midway,right,font=\scriptsize]{6$\rightarrow$2}}]
+                ]
+            ]
+        ]
+    ]
+\end{forest}

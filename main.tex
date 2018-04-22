@@ -1,0 +1,129 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\documentclass[aspectratio=169]{beamer}
+\hypersetup{pdfpagemode=FullScreen} % Start in fullscreen mode in adobe acrobat
+
+\usepackage[utf8]{inputenx}
+\usepackage[super]{nth}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, arrows.meta}
+\usepackage{packages/graphiso}   % https://github.com/rvf0068/graphiso.sty, also incluse tkz-graph
+\usepackage{booktabs} % Much better 'book style' table spacing
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{adjustbox}
+\usepackage{forest}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\usepackage{multirow}
+\usepackage{bbding}
+
+
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+% \usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+% \usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+% \usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+% \usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+% \usetheme{Singapore}
+%\usetheme{Szeged}
+% \usetheme{Warsaw}
+
+\title{Graph Isomorphisms \& Automorphisms}
+
+% A subtitle is optional and this may be deleted
+\subtitle{University of Twente \& Nedap University\\Nedap University 2016--2018 graduation}
+
+% Tussen voorletters kan een smallere spatie, te weten: \,
+\author[]{A.\,G.~van~Herwijnen \and C.\,A.\,M.\,A.~Reuvers \and F.\,T.\,F.~Meijer~Cluwen \and\\M.\,H.\,B.~Banierink \and M.\,M.~Slot \and E.~Huizinga}
+
+\date[NU2 Graduation, 23-04-2018]{23-04-2018}
+
+\subject{Discrete Structures and Efficient Algorithms}
+
+\newcommand{\dy}{5cm}
+\newcommand{\darkarrow}{{Latex[length=4mm, width=3mm]}}
+
+\setbeamertemplate{enumerate items}[circle]
+\setbeamertemplate{itemize items}[circle]
+
+% Change colours
+\definecolor{orange}{RGB}{255, 135, 0}
+
+\setbeamercolor{frametitle}{fg=orange}
+\setbeamercolor{title}{fg=orange}
+\setbeamercolor{palette primary}{fg=orange!80!, bg=gray!30!white} 
+\setbeamercolor{palette secondary}{fg=orange!80!, bg=gray!20!white}
+\setbeamercolor{palette tertiary}{fg=white!80!, bg=orange}
+
+\setbeamercolor{item projected}{fg=white, bg=orange}
+\setbeamercolor{subitem projected}{fg=white, bg=orange}
+\setbeamercolor{subsubitem projected}{fg=white, bg=orange}
+\setbeamercolor{itemize item}{fg=orange}
+\setbeamercolor{itemize subitem}{fg=orange}
+\setbeamercolor{itemize subsubitem}{fg=orange}
+\setbeamercolor{alerted text}{fg=orange}
+
+% Change margin
+\setbeamersize{text margin left=20pt,text margin right=15pt}
+
+% Let's get started
+\begin{document}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\beamertemplatenavigationsymbolsempty
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \begin{frame}{Outline}
+%   \tableofcontents
+% %   You might wish to add the option [pausesections]
+% \end{frame}
+
+% \input{beamer_demo.tex} % Uncomment this line to see the demo slides from beamer
+\input{introduction/main.tex}
+
+\input{solving_the_problem/main.tex}
+\subsection{}
+\againframe<4>{processing-overview}
+
+\input{results.tex}
+
+\input{summary.tex}
+
+\input{appendix.tex} 
+\end{document}
